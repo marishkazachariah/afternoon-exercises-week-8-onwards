@@ -59,12 +59,43 @@ public class ExerciseOne {
             writer.write("Address: " + address + "\n");
             writer.write("Favourite Book:\n");
             writer.write("Book Title: " + bookTitle + "\n");
-            writer.write("Athor: " + author + "\n");
+            writer.write("Author: " + author + "\n");
             writer.write("Publication Year: " + publicationYear + "\n");
             writer.write("Favorite Color: " + favoriteColor + "\n");
             System.out.println("User information has been written to userinfo.txt file.");
         } catch (IOException e) {
             System.out.println("An error occurred while writing to the file: " + e.getMessage());
+        }
+    }
+
+    // Day 2 Exercise 5
+    public static void specifyPathToWriteFile(String name, int age, String email, String
+            phoneNumber, String address, String bookTitle, String author,
+                                              int publicationYear, String favoriteColor) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the file name: ");
+        String fileName = scanner.nextLine();
+
+        try (FileWriter writer = new FileWriter("src/main/java/week_8/day_1/" + fileName)) {
+            writer.write("Summary report\n");
+            writer.write("User Information:\n");
+            writer.write("Name: " + name + "\n");
+            writer.write("Age: " + age + "\n");
+            writer.write("Birth Year: " + getBirthYear(age) + "\n");
+            writer.write("Email: " + email + "\n");
+            writer.write("Phone Number: " + phoneNumber + "\n");
+            writer.write("Address: " + address + "\n");
+            writer.write("Favourite Book:\n");
+            writer.write("Book Title: " + bookTitle + "\n");
+            writer.write("Author: " + author + "\n");
+            writer.write("Publication Year: " + publicationYear + "\n");
+            writer.write("Favorite Color: " + favoriteColor + "\n");
+            System.out.println("User information has been written to userinfo.txt file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the file: " + e.getMessage());
+        } finally {
+            scanner.close();
         }
     }
 
@@ -81,7 +112,7 @@ public class ExerciseOne {
     }
 
     public static void main(String[] args) {
-        String userFilePath = "src/main/java/exercises/userInfo.txt";
+        String userFilePath = "src/main/java/week_8/day_1/userInfo.txt";
 
         Scanner sc = new Scanner(System.in);
 
@@ -165,5 +196,8 @@ public class ExerciseOne {
         sc.close();
 
         readFile(userFilePath);
+
+        // Day 2 Exercise 5
+        specifyPathToWriteFile(name, age, email, phoneNumber, address, bookTitle, author, publicationYear, favoriteColor);
     }
 }
