@@ -87,7 +87,7 @@ public class DayTwoExercises {
             String answer = scanner.nextLine().toLowerCase();
             if (answer.equals("yes")) {
                 fileToDelete.delete();
-                System.out.println("User information deleted successfully.");
+                if(fileToDelete.delete()) System.out.println("User information deleted successfully.");
             } else {
                 System.out.println("User information was not deleted.");
             }
@@ -147,7 +147,7 @@ public class DayTwoExercises {
 
                     if(ageToDetermine < 13) {
                         System.out.println("User is a child");
-                    } else if (ageToDetermine >= 13 && ageToDetermine < 18) {
+                    } else if (ageToDetermine < 18) {
                         System.out.println("User is a teenager");
                     } else if (ageToDetermine > 54) {
                         System.out.println("User is a senior");
