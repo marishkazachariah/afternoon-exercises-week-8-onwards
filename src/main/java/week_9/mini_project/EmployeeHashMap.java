@@ -15,6 +15,8 @@ public class EmployeeHashMap {
         Employee employee3 = new Employee("Jane Goodall", 3, "Engineering", "Product Owner", 12);
         Employee employee4 = new Employee("Mary Kay", 4, "Marketing", "Social Media Assistant", 11);
 
+        EmployeeHashMap employeeHashMap = new EmployeeHashMap();
+
         try {
             addEmployee(employee1);
             addEmployee(employee2);
@@ -27,16 +29,16 @@ public class EmployeeHashMap {
             System.out.println("Error: " + e.getMessage());
         }
 
-        System.out.println("Filtered Employees by Department:\n" + filterByDepartment("Engineering"));
-        System.out.println("Filtered Employees by Job Title:\n" + filterByDepartment("HR Manager"));
-        System.out.println("Employees by Manager ID:\n" + filterByManager(11));
+        System.out.println("Filtered Employees by Department:\n" + employeeHashMap.filterByDepartment("Engineering"));
+        System.out.println("Filtered Employees by Job Title:\n" + employeeHashMap.filterByDepartment("HR Manager"));
+        System.out.println("Employees by Manager ID:\n" + employeeHashMap.filterByManager(11));
 
-        updateEmployee();
+        employeeHashMap.updateEmployee();
 
         Employee searchResult = searchEmployee(3);
         System.out.println(searchResult);
 
-        deleteEmployee(4);
+        employeeHashMap.deleteEmployee(4);
     }
 
     // Exercise 8
@@ -57,7 +59,7 @@ public class EmployeeHashMap {
         return employeeMap.get(employeeID);
     }
 
-    public static void updateEmployee() {
+    public void updateEmployee() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the id of the employee you wish to update: ");
         int id = sc.nextInt();
@@ -89,27 +91,28 @@ public class EmployeeHashMap {
         } else {
             System.err.println("Employee with " + id + " not found");
         }
+        sc.close();
     }
 
-    public static void deleteEmployee(int employeeID) {
+    public void deleteEmployee(int employeeID) {
         employeeMap.remove(employeeID);
     }
 
-    public static List<Employee> filterByDepartment(String department) {
+    public List<Employee> filterByDepartment(String department) {
         return employeeMap.values()
                 .stream()
                 .filter(employee -> employee.getDepartment().equalsIgnoreCase(department))
                 .toList();
     }
 
-    public static List<Employee> filterByJobTitle(String jobTitle) {
+    public List<Employee> filterByJobTitle(String jobTitle) {
         return employeeMap.values()
                 .stream()
                 .filter(employee -> employee.getJobTitle().equalsIgnoreCase(jobTitle))
                 .toList();
     }
 
-    public static List<Employee> filterByManager(int managerID) {
+    public List<Employee> filterByManager(int managerID) {
         return employeeMap.values()
                 .stream()
                 .filter(employee -> employee.getManagerID() == managerID)
