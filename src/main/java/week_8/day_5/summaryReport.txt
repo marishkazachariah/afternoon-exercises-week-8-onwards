@@ -1,0 +1,35 @@
+Summary Report of Students
+Average GPA: 3.1999999999999997
+Total number of students: 3
+
+Students:
+Name: Nathan
+Student ID: 32
+Age: 34
+GPA: 3.2
+Courses
+[Math, Science]
+Grades
+[68, 83]
+Grade Average: 75.5
+*************
+Name: Maria
+Student ID: 48
+Age: 22
+GPA: 3.9
+Courses
+[Math, Art]
+Grades
+[90, 88]
+Grade Average: 89.0
+*************
+Name: Moe
+Student ID: 42
+Age: 23
+GPA: 2.5
+Courses
+[English, Biology]
+Grades
+[55, 75]
+Grade Average: 65.0
+*************
