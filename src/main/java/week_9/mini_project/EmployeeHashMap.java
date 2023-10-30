@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 // Exercises 3, 4, 5, 6
 public class EmployeeHashMap {
@@ -15,10 +14,18 @@ public class EmployeeHashMap {
         Employee employee2 = new Employee("Alice Smith", 2, "Engineering", "Software Engineer", 11);
         Employee employee3 = new Employee("Jane Goodall", 3, "Engineering", "Product Owner", 12);
         Employee employee4 = new Employee("Mary Kay", 4, "Marketing", "Social Media Assistant", 11);
-        addEmployee(employee1);
-        addEmployee(employee2);
-        addEmployee(employee3);
-        addEmployee(employee4);
+
+        try {
+            addEmployee(employee1);
+            addEmployee(employee2);
+            addEmployee(employee3);
+            addEmployee(employee4);
+
+            Employee duplicateEmployee = new Employee("Mary Kate", 1, "HR", "Assistant", 10);
+            addEmployee(duplicateEmployee);
+        } catch (DuplicateEmployeeIdException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
         System.out.println("Filtered Employees by Department:\n" + filterByDepartment("Engineering"));
         System.out.println("Filtered Employees by Job Title:\n" + filterByDepartment("HR Manager"));
@@ -32,9 +39,19 @@ public class EmployeeHashMap {
         deleteEmployee(4);
     }
 
-    public static void addEmployee(Employee employee) {
-        employeeMap.put(employee.getId(), employee);
+    // Exercise 8
+    public static void addEmployee(Employee employee) throws DuplicateEmployeeIdException {
+        int id = employee.getId();
+        if (employeeMap.containsKey(id)) {
+            throw new DuplicateEmployeeIdException("Employee with ID " + id + " already exists.");
+        } else {
+            employeeMap.put(id, employee);
+        }
     }
+
+//    public static void addEmployee(Employee employee) {
+//        employeeMap.put(employee.getId(), employee);
+//    }
 
     public static Employee searchEmployee(int employeeID) {
         return employeeMap.get(employeeID);
@@ -51,7 +68,7 @@ public class EmployeeHashMap {
             System.out.println("2. Job Title");
             System.out.println("3. Manager ID");
             int inputToChange = sc.nextInt();
-            if(inputToChange == 1) {
+            if (inputToChange == 1) {
                 System.out.println("Enter new department");
                 String newDepartment = sc.nextLine();
                 employee.setDepartment(newDepartment);
@@ -61,7 +78,7 @@ public class EmployeeHashMap {
                 String newJobTitle = sc.nextLine();
                 employee.setJobTitle(newJobTitle);
                 System.out.println("Updated job title for employee id: " + id);
-            } else if(inputToChange == 3) {
+            } else if (inputToChange == 3) {
                 System.out.println("Enter new manager ID");
                 int newManagerID = sc.nextInt();
                 employee.setManagerID(newManagerID);

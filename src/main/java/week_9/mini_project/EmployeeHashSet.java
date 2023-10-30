@@ -70,7 +70,7 @@ public class EmployeeHashSet {
             writer.println("**Employee Statistics**\n");
             writer.println("Total Employees: " + totalEmployees);
             writer.println("\nEmployees per Department:");
-            for (Map.Entry<String, Integer> entry : employeesByDepartment.entrySet()) {
+            for (Map.Entry<String, Integer> entry : employeesByDepartment .entrySet()) {
                 writer.println(entry.getKey() + ": " + entry.getValue() + " employees");
             }
             System.out.println("Employee report have been successfully saved to 'employee_statistics.txt'.");
