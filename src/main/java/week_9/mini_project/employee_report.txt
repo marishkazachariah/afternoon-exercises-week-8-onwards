@@ -1,0 +1,8 @@
+**Employee Statistics**
+
+Total Employees: 4
+
+Employees per Department:
+Engineering: 2 employees
+HR: 1 employees
+Marketing: 1 employees
