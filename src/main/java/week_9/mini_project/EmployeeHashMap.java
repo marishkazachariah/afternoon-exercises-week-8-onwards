@@ -1,19 +1,28 @@
 package week_9.mini_project;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 // Exercises 3, 4, 5, 6
 public class EmployeeHashMap {
     public static Map<Integer, Employee> employeeMap = new HashMap<>();
 
     public static void main(String[] args) {
-        Employee employee1 = new Employee("John Graham", 1, "HR", "HR Manager", 10);
-        Employee employee2 = new Employee("Alice Smith", 2, "Engineering", "Software Engineer", 11);
-        Employee employee3 = new Employee("Jane Goodall", 3, "Engineering", "Product Owner", 12);
-        Employee employee4 = new Employee("Mary Kay", 4, "Marketing", "Social Media Assistant", 11);
+        Calendar employee1HiringDate = Calendar.getInstance();
+        employee1HiringDate.set(2022, Calendar.OCTOBER, 31);
+
+        Calendar employee2HiringDate = Calendar.getInstance();
+        employee2HiringDate.set(2019, Calendar.MARCH, 1);
+
+        Calendar employee3HiringDate = Calendar.getInstance();
+        employee3HiringDate.set(2023, Calendar.JANUARY, 4);
+
+        Calendar employee4HiringDate = Calendar.getInstance();
+        employee4HiringDate.set(2022, Calendar.JULY, 15);
+
+        Employee employee1 = new Employee("John Graham", 1, "HR", "HR Manager", 10, employee1HiringDate, 60000);
+        Employee employee2 = new Employee("Alice Smith", 2, "Engineering", "Software Engineer", 11, employee2HiringDate, 55000);
+        Employee employee3 = new Employee("Jane Goodall", 3, "Engineering", "Product Owner", 12, employee3HiringDate, 78000);
+        Employee employee4 = new Employee("Mary Kay", 4, "Marketing", "Social Media Assistant", 13, employee4HiringDate, 45000);
 
         EmployeeHashMap employeeHashMap = new EmployeeHashMap();
 
@@ -23,7 +32,7 @@ public class EmployeeHashMap {
             addEmployee(employee3);
             addEmployee(employee4);
 
-            Employee duplicateEmployee = new Employee("Mary Kate", 1, "HR", "Assistant", 10);
+            Employee duplicateEmployee = new Employee("Mary Kate", 1, "HR", "Assistant", 10, employee1HiringDate, 52000);
             addEmployee(duplicateEmployee);
         } catch (DuplicateEmployeeIdException e) {
             System.out.println("Error: " + e.getMessage());

@@ -3,9 +3,7 @@ package week_9.mini_project;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 // Exercise 2
@@ -13,10 +11,22 @@ public class EmployeeHashSet {
     public static Set<Employee> employeeSet = new HashSet<>();
 
     public static void main(String[] args) {
-        Employee employee1 = new Employee("John Graham", 1, "HR", "HR Manager", 10);
-        Employee employee2 = new Employee("Alice Smith", 2, "Engineering", "Software Engineer", 11);
-        Employee employee3 = new Employee("Jane Goodall", 3, "Engineering", "Product Owner", 12);
-        Employee employee4 = new Employee("Mary Kay", 4, "Marketing", "Social Media Assistant", 13);
+        Calendar employee1HiringDate = Calendar.getInstance();
+        employee1HiringDate.set(2022, Calendar.OCTOBER, 31);
+
+        Calendar employee2HiringDate = Calendar.getInstance();
+        employee2HiringDate.set(2019, Calendar.MARCH, 1);
+
+        Calendar employee3HiringDate = Calendar.getInstance();
+        employee3HiringDate.set(2023, Calendar.JANUARY, 4);
+
+        Calendar employee4HiringDate = Calendar.getInstance();
+        employee4HiringDate.set(2022, Calendar.JULY, 15);
+
+        Employee employee1 = new Employee("John Graham", 1, "HR", "HR Manager", 10, employee1HiringDate, 60000);
+        Employee employee2 = new Employee("Alice Smith", 2, "Engineering", "Software Engineer", 11, employee2HiringDate, 55000);
+        Employee employee3 = new Employee("Jane Goodall", 3, "Engineering", "Product Owner", 12, employee3HiringDate, 78000);
+        Employee employee4 = new Employee("Mary Kay", 4, "Marketing", "Social Media Assistant", 13, employee4HiringDate, 45000);
 
         employeeSet.add(employee1);
         employeeSet.add(employee2);
@@ -56,15 +66,6 @@ public class EmployeeHashSet {
         Map<String, Integer> employeesByDepartment = employees.stream()
                 .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.summingInt(e -> 1)));
 
-
-        // Alternative is getByDefault but I wanted to practice streams more
-        /*
-        Map<String, Integer> employeesByDepartment = new HashMap<>();
-        for (Employee employee : employees) {
-            String department = employee.getDepartment();
-            EmployeesByDepartment.put(department, employeesByDepartment.getOrDefault(department, 0) + 1);
-        }
-         */
 
         try (PrintWriter writer = new PrintWriter(new File("src/main/java/week_9/mini_project/employee_report.txt"))) {
             writer.println("**Employee Statistics**\n");
