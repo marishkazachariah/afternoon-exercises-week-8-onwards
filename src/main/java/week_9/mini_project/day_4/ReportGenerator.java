@@ -33,6 +33,7 @@ public class ReportGenerator {
         }
         throw new NullPointerException("Invalid value");
     }
+
     public static void chooseReportToGenerate() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Choose which report to generate by typing the numerical value");
