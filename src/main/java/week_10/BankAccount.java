@@ -18,7 +18,7 @@ public class BankAccount {
         return accountNumber;
     }
 
-    public synchronized void deposit(int amount) {
+    public synchronized void deposit(double amount) {
         if (amount <= 0) {
             System.err.println("Invalid deposit amount");
         } else {
