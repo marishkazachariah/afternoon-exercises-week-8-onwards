@@ -6,9 +6,10 @@ public class Main {
         Bank bank = new Bank();
         bank.createAccount(400, 2342321);
         bank.createAccount(330, 6453345);
-        bank.executeCustomerTransactions();
+        bank.executeCustomerTransactions();     // Cached Thread Pool
 
-        // Exercise 1.2
-
+        // Exercise 1.2 - Fixed Thread Pool
+        BankFixedThreadPool fixedThreadBank = new BankFixedThreadPool();
+        fixedThreadBank.executeCustomerTransactions();
     }
 }

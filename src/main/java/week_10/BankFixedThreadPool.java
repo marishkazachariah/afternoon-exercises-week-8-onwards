@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-// Exercise 1.1 & 1.2
-class Bank {
+// Exercise 1.2
+class BankFixedThreadPool {
     private final List<BankAccount> accounts = new ArrayList<>();
     private final ExecutorService executorService;
 
-    Bank() {
-        this.executorService = Executors.newCachedThreadPool();
+    BankFixedThreadPool() {
+        this.executorService = Executors.newFixedThreadPool(6);
     }
 
 
