@@ -7,9 +7,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-// Exercise 3
 class BankWithFuture {
-    private final List<BankAccount> accounts = new ArrayList<>();
+    private final List<BankAccountDetails> accounts = new ArrayList<>();
+    private BankAccountTransactions bankAccountTransactions;
     private final ExecutorService executorService;
 
     BankWithFuture() {
@@ -18,12 +18,13 @@ class BankWithFuture {
 
 
     public void createAccount(double initialBalance, int accountNumber) {
-        BankAccount account = new BankAccount(initialBalance, accountNumber);
+        BankAccountDetails account = new BankAccountDetails(initialBalance, accountNumber);
+        this.bankAccountTransactions = new BankAccountTransactions(account);
         accounts.add(account);
     }
 
-    public BankAccount getAccount(int accountNumber) {
-        for (BankAccount account : accounts) {
+    public BankAccountDetails getAccount(int accountNumber) {
+        for (BankAccountDetails account : accounts) {
             if (account.getAccountNumber() == accountNumber) {
                 return account;
             }
@@ -33,9 +34,9 @@ class BankWithFuture {
 
     public Future<Void> executeCustomerTransactionAsync(int accountNumber, double depositAmount) {
         Callable<Void> transactionTask = () -> {
-            BankAccount account = getAccount(accountNumber);
+            BankAccountDetails account = getAccount(accountNumber);
             if (account != null) {
-                account.deposit(depositAmount);
+                bankAccountTransactions.deposit(account, depositAmount);
             }
             return null;
         };
