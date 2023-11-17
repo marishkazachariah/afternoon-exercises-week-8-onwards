@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-// Exercise 1.2
 class BankFixedThreadPool {
-    private final List<BankAccount> accounts = new ArrayList<>();
+    private final List<BankAccountDetails> accounts = new ArrayList<>();
     private final ExecutorService executorService;
 
     BankFixedThreadPool() {
@@ -16,12 +15,12 @@ class BankFixedThreadPool {
 
 
     public void createAccount(double initialBalance, int accountNumber) {
-        BankAccount account = new BankAccount(initialBalance, accountNumber);
+        BankAccountDetails account = new BankAccountDetails(initialBalance, accountNumber);
         accounts.add(account);
     }
 
-    public BankAccount getAccount(int accountNumber) {
-        for (BankAccount account : accounts) {
+    public BankAccountDetails getAccount(int accountNumber) {
+        for (BankAccountDetails account : accounts) {
             if (account.getAccountNumber() == accountNumber) {
                 return account;
             }
@@ -30,7 +29,7 @@ class BankFixedThreadPool {
     }
 
     public void executeCustomerTransactions() {
-        for(BankAccount account : accounts) {
+        for(BankAccountDetails account : accounts) {
             int transactionAmount = 125;
             Customer customer = new Customer(account, executorService, transactionAmount);
             executorService.submit(customer);

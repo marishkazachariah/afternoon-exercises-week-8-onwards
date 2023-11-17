@@ -5,23 +5,20 @@ import java.util.concurrent.Future;
 
 public class Main {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        // Exercise 1.1
         Bank bank = new Bank();
         bank.createAccount(400, 2342321);
         bank.createAccount(330, 6453345);
         bank.executeCustomerTransactions();     // Cached Thread Pool
 
-        // Exercise 1.2 - Fixed Thread Pool
+        // Fixed Thread Pool
         BankFixedThreadPool fixedThreadBank = new BankFixedThreadPool();
         fixedThreadBank.createAccount(400, 2342321);
         fixedThreadBank.createAccount(330, 6453345);
         fixedThreadBank.executeCustomerTransactions();
 
-        // Exercise 3
         callBankWithFuture();
     }
 
-    // Exercise 3
     public static void callBankWithFuture() throws ExecutionException, InterruptedException {
         BankWithFuture bankWithFuture = new BankWithFuture();
         bankWithFuture.createAccount(400, 2342321);
