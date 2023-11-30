@@ -108,10 +108,11 @@ public class ProductDao {
 
     public void deleteProduct(int id) {
         try (Connection connection = DBConnection.getConnection()) {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM Product WHERE id = ?");
-            ps.setInt(1, id);
-            ps.executeUpdate();
-            connection.commit();
+            try (PreparedStatement ps = connection.prepareStatement("DELETE FROM Product WHERE id = ?")) {
+                ps.setInt(1, id);
+                ps.executeUpdate();
+                connection.commit();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
