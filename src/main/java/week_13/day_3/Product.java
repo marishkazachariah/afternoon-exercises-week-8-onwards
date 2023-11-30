@@ -9,6 +9,14 @@ public class Product {
 
     public Product() {}
 
+    // Constructor without the id parameter
+    public Product(String name, String category, double price, int stockQuantity) {
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+    }
+
     public Product(int id, String name, String category, double price, int stockQuantity) {
         this.id = id;
         this.name = name;

@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class DBConnection {
+    private DBConnection() {
+    }
+
     public static Connection getConnection() throws SQLException {
         Properties prop = new Properties();
         try (InputStream input = Main.class.getClassLoader().getResourceAsStream("config.properties")) {
