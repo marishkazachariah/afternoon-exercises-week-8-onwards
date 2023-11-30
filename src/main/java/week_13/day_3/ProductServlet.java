@@ -23,6 +23,7 @@ public class ProductServlet extends HttpServlet {
         String pathInfo = requestUrl.substring(contextPath.length() + "/products/".length());
 
         if (pathInfo.isEmpty()) {
+            // No specific path, return all products
             List<Product> products = productDao.getAllProducts();
             JSONArray jsonArray = new JSONArray();
 
@@ -37,20 +38,36 @@ public class ProductServlet extends HttpServlet {
             }
 
             response.getOutputStream().println(jsonArray.toString());
-        } else {
-            Product product = productDao.getProduct(Integer.parseInt(pathInfo));
+        } else if (pathInfo.startsWith("category/") && pathInfo.contains("price-min/") && pathInfo.contains("price-max/")) {
+            // Path matches a category and price range filter
+            String[] parts = pathInfo.split("/");
+            if (parts.length == 6) {
+                String category = parts[1];
+                double minPrice = Double.parseDouble(parts[3]);
+                double maxPrice = Double.parseDouble(parts[5]);
 
-            if (product != null) {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("id", product.getId());
-                jsonObject.put("name", product.getName());
-                jsonObject.put("category", product.getCategory());
-                jsonObject.put("price", product.getPrice());
-                jsonObject.put("StockQuantity", product.getStockQuantity());
-                response.getOutputStream().println(jsonObject.toString());
+                List<Product> products = productDao.getProductsByCategoryAndPriceRange(category, minPrice, maxPrice);
+                JSONArray jsonArray = new JSONArray();
+
+                for (Product product : products) {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("id", product.getId());
+                    jsonObject.put("name", product.getName());
+                    jsonObject.put("category", product.getCategory());
+                    jsonObject.put("price", product.getPrice());
+                    jsonObject.put("StockQuantity", product.getStockQuantity());
+                    jsonArray.put(jsonObject);
+                }
+
+                response.getOutputStream().println(jsonArray.toString());
             } else {
-                response.getOutputStream().println("{}");
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.getWriter().println("Invalid path format for category and price range filter");
             }
+        } else {
+            // Path does not match any known pattern
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().println("Invalid path");
         }
     }
 
