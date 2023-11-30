@@ -91,7 +91,7 @@ public class ProductDao {
 
     public void updateProduct(Product product) {
         try (Connection connection = DBConnection.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement("UPDATE users SET name = ?, category = ?, price = ?, StockQuantity = ? WHERE id = ?")) {
+            try (PreparedStatement ps = connection.prepareStatement("UPDATE Product SET name = ?, category = ?, price = ?, StockQuantity = ? WHERE id = ?")) {
                 ps.setString(1, product.getName());
                 ps.setString(2, product.getCategory());
                 ps.setDouble(3, product.getPrice());
