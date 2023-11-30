@@ -28,7 +28,7 @@ public class ProductServlet extends HttpServlet {
 
             for (Product product : products) {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("id", product.getName());
+                jsonObject.put("id", product.getId());
                 jsonObject.put("name", product.getName());
                 jsonObject.put("category", product.getCategory());
                 jsonObject.put("price", product.getPrice());
@@ -42,7 +42,7 @@ public class ProductServlet extends HttpServlet {
 
             if (product != null) {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("id", product.getName());
+                jsonObject.put("id", product.getId());
                 jsonObject.put("name", product.getName());
                 jsonObject.put("category", product.getCategory());
                 jsonObject.put("price", product.getPrice());
@@ -130,7 +130,7 @@ public class ProductServlet extends HttpServlet {
         String pathInfo = requestUrl.substring("/products/".length());
 
         if (pathInfo.isEmpty()) {
-            response.getWriter().println("No person specified to delete");
+            response.getWriter().println("No product specified to delete");
         } else {
             productDao.deleteProduct(Integer.parseInt(pathInfo));
         }
