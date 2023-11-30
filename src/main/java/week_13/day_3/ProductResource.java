@@ -10,7 +10,7 @@ public class ProductResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Product> getUsers() {
+    public List<Product> getProducts() {
         return productDao.getAllProducts();
     }
 
