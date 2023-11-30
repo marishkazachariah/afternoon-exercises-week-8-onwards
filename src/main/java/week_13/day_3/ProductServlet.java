@@ -64,6 +64,28 @@ public class ProductServlet extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 response.getWriter().println("Invalid path format for category and price range filter");
             }
+        } else if (pathInfo.startsWith("id/")) {
+            // Path matches product by id
+            String[] parts = pathInfo.split("/");
+            if (parts.length == 2) {
+                int productId = Integer.parseInt(parts[1]);
+                Product product = productDao.getProduct(productId);
+
+                if (product != null) {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("id", product.getId());
+                    jsonObject.put("name", product.getName());
+                    jsonObject.put("category", product.getCategory());
+                    jsonObject.put("price", product.getPrice());
+                    jsonObject.put("StockQuantity", product.getStockQuantity());
+                    response.getOutputStream().println(jsonObject.toString());
+                } else {
+                    response.getOutputStream().println("{}");
+                }
+            } else {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.getWriter().println("Invalid path format for product by id");
+            }
         } else {
             // Path does not match any known pattern
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
